@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Haven | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/1.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <img src="{% static 'images/company_logo2.png' %}" alt="company_logo" class="company-logo"> 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static 'images/user_logo.png' %}" alt="User Logo" class="user-logo img-fluid">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end custom-dropdown-menu">
+                            {% if user.is_authenticated %}
+                                <!-- Display username at the top -->
+                                <li class="dropdown-header text-primary">
+                                    Welcome, {{ request.user.username }}
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{% url 'book_table' %}">
+                                        <i class="bi bi-calendar2-check me-2"></i> Book Table
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <i class="bi bi-people me-2"></i> Book Event
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{% url 'login' %}">
+                                        <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{% url 'signup' %}">
+                                        <i class="bi bi-person-plus me-2"></i> Signup
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Hero Section -->
+     <br>
+     <br>
+    <section class="hero-section text-center py-0">
+        <div class="container">
+            <h1>Welcome to <span>Coffee Haven</span></h1>
+            
+            <!-- Image Gallery -->
+            <div class="d-flex flex-wrap justify-content-center mt-4">
+                <img src="{% static 'images/removed.png' %}" alt="Order Now" class="static-image img-fluid">
+                <img src="{% static 'images/black.png' %}" alt="Rotating Image" class="rotating-image img-fluid">
+                <img src="{% static 'images/coffee1.png' %}" alt="Order Now" class="static-image img-fluid">
+            </div>
+
+            <!-- Circular Image Gallery -->
+            <div class="d-flex flex-wrap justify-content-center text-center mt-4 gap-3">
+                <div class="text-center">
+                    <a href="{% url 'BakeryItems' %}" class="d-block">
+                        <img src="{% static 'images/croissant.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Bakery Items</p>
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'Desserts' %}" class="d-block">
+                        <img src="{% static 'images/pastry.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Desserts</p>
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'Beverages' %}" class="d-block">
+                        <img src="{% static 'images/coffee_cup2.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Coffee & Beverages</p>
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'Food' %}" class="d-block">
+                        <img src="{% static 'images/food.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Food</p>
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'Breakfast' %}" class="d-block">
+                        <img src="{% static 'images/breakfast.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Breakfast</p>
+                </div>
+                <div class="text-center">
+                    <a href="{% url 'Snacks' %}" class="d-block">
+                        <img src="{% static 'images/snacks.png' %}" alt="Order Now" class="circular-image rounded-circle img-fluid">
+                    </a>
+                    <p class="image-name">Snacks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section 1 -->
+    <section class="hero-video3 text-center py-1">
+        <div class="ratio ratio-16x9">
+            <video autoplay loop muted class="w-100" preload="auto">
+                <source src="{% static 'videos/video3.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>       
+
+    <!-- Taglines Section -->
+    <section class="hero-video2 text-center py-1">
+        <div class="container">
+            <div class="row">
+                <!-- First Column -->
+                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                    <div class="tagline">"For every coffee craving, we’ve got a solution."</div>
+                    <div class="tagline">"Because mornings deserve the best brews!"</div>
+                    <div class="tagline">"Sip, relax, repeat!"</div>
+                    <div class="tagline">"The only thing missing is you!"</div>
+                </div>
+                <!-- Second Column -->
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <div  style="max-width: 360px;">
+                        <video autoplay loop muted class="w-100">
+                            <source src="{% static 'videos/video2.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <!-- Third Column -->
+                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center text-center">
+                    <div class="tag-paragraph">
+                        <p>Welcome to <span style="font-weight: 700; color: aqua; font-size: 25px;">Coffee Haven</span>, where every sip tells a story, and every aroma draws you closer to a world of indulgence. Step into a haven where the finest brews meet an ambiance of warmth and elegance. Whether you're craving the bold embrace of a handcrafted espresso or the velvety caress of a latte, our menu is crafted to awaken your senses. Let the allure of freshly baked treats and perfectly brewed coffee transport you to a place where time slows down, and every moment is savored. Discover the taste of perfection because you deserve nothing less.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section 2 -->
+    <section class="hero-video text-center py-1">
+        <div class="ratio ratio-16x9">
+            <video autoplay loop muted class="w-100" preload="auto">
+                <source src="{% static 'videos/video1.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <section class="hero-video2 text-center py-1">
+            <div class="row">
+                <!-- First Column -->
+                <div class="col-md-4  align-items-center ms-0 ps-0">
+                    <img src="{% static 'images/company_logo2.png' %}" alt="company_logo" class="company-logo2">
+                    <div class="list">
+                        <ul class="list-unstyled">
+                            <li style="margin-bottom: 15px; text-align: center;" class="list-element"><a href="{% url 'aboutus' %}" style="text-decoration: none; color: rgb(250, 210, 32); font-weight: bolder; font-size: 25px; font-family: 'Roboto', sans-serif;">About Us</a></li>
+                            <li style="margin-bottom: 15px; text-align: center;" class="list-element"><a href="#" style="text-decoration: none; color: white; font-size: 20px; font-family:'Bodoni Moda', serif;">Our Heritage</a></li>
+                            <li style="margin-bottom: 15px; text-align: center;" class="list-element"><a href="#" style="text-decoration: none; color: white; font-size: 20px; font-family:'Bodoni Moda', serif;">Coffeehouse</a></li>
+                            <li style="text-align: center;" class="list-element"><a href="#" style="text-decoration: none; color: white; font-size: 20px; font-family:'Bodoni Moda', serif;">Our Company</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Second Column -->
+                <div class="col-md-4 ms-0 ps-0">
+                    <div class="list text-center">
+                        <ul class="list-unstyled">
+                            <li style="margin-bottom: 15px;">
+                                <h3 style="text-decoration: none; color: rgb(250, 210, 32); font-weight: bolder; font-size: 25px; font-family: 'Roboto', sans-serif;">Contact Us</h3>
+                            </li>
+                        </ul>
+                
+                        <!-- Social Links -->
+                        <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+                            <!-- Gmail Icon -->
+                            <a href="{{ gmail_url }}" target="_blank" class="mail-icon">
+                                <img src="{% static 'images/gmail.png' %}" alt="Mail Icon" class="store-icon">
+                            </a>
+                        
+                            <!-- Telephone & Number with Flexbox -->
+                            <div class="d-flex align-items-center gap-3 w-100">
+                                <a href="tel:{{ phone_number }}" class="social-link">
+                                    <img src="{% static 'images/telephone.png' %}" class="store-icon">
+                                </a>
+                                <p class="phone-number" style="justify-content: center;">6269 - 341024</p>
+                            </div>
+                        
+                            <!-- YouTube Icon -->
+                            <a href="#" class="social-link">
+                                <img src="{% static 'images/location.png' %}" class="store-icon">
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Third Column -->
+                <div class="col-md-4 d-flex flex-column align-items-center text-center ms-0 ps-0">
+                    <div class="col-md-4 d-flex flex-row align-items-center text-center gap-3">
+                        <a href="#" class="social-link">
+                            <img src="{% static 'images/instagram.png' %}" class="store-icon">
+                        </a> 
+                        <a href="#" class="social-link">
+                            <img src="{% static 'images/facebook.png' %}" class="store-icon">
+                        </a> 
+                        <a href="#" class="social-link">
+                            <img src="{% static 'images/youtube.png' %}" class="store-icon">
+                        </a>
+                    </div>
+                   
+                    <a href="#" class="social-link">
+                        <img src="{% static 'images/play_store.png' %}" class="store-icon" style="width: 30%; height: auto;">
+                    </a>
+                    <a href="#">
+                        <img src="{% static 'images/app_store.png' %}" class="store-icon" style="width: 30%; height: auto;">
+                    </a>
+                </div>
+            </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/1.js' %}"></script>
+    <script src="{% static 'js/common_cart.js' %}"></script>
+</body>
+</html>

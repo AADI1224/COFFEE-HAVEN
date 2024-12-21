@@ -1,0 +1,91 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery Menu</title>
+    <link rel="stylesheet" href="{% static 'css/menuitems.css' %}"> <!-- Link to your updated CSS file -->
+    <style>
+        .back-to-home {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #FF5722;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-to-home:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="page-title">Welcome to Our Bakery Menu</h1>
+
+            <div class="cart-icon">
+                <a href="{% url 'cart' %}" aria-label="Go to Cart">
+                    <img src="{% static 'images/cart.png' %}" alt="Cart">
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-container">
+            <div class="catalog">
+                {% csrf_token %}
+                {% for item in bakeryitem %}
+                    <div class="card">
+                        <div class="card-img">
+                            <img src="{{ item.img.url }}" alt="{{ item.name }}">
+                        </div>
+                        <div class="card-content">
+                            <h3>{{ item.name }}</h3>
+                            <p>{{ item.description }}</p>
+                            <p class="price">₹{{ item.price }}</p>
+
+                            <div class="quantity">
+                                <input type="number" id="quantity-{{ item.id }}" value="1" min="1">
+                            </div>
+
+                            <button class="add-btn" 
+                                    onclick="addToCart('{{ item.name }}', '{{ item.price }}', '{{ item.img.url }}', '{{ item.id }}')">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                {% empty %}
+                <div class="marquee-container">
+                    <div class="marquee-text">No items available at the moment. Please check back later!</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Coffee Haven. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="{% url 'template1' %}" class="back-to-home" aria-label="Back to Home">
+        Back to Home
+    </a>
+
+    <!-- Link the JavaScript file -->
+    <script src="{% static 'js/common_cart.js' %}"></script>
+</body>
+</html>

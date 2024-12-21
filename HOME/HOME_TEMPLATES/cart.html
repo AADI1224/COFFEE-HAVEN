@@ -1,0 +1,155 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <script src="{% static 'js/common_cart.js' %}"></script> <!-- Common JavaScript functions -->
+    <style>
+        #empty-cart-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 1000;
+            opacity: 0;  /* Start with opacity 0 */
+            visibility: hidden;  /* Start with visibility hidden */
+            transition: opacity 1s ease-out;  /* Apply opacity transition */
+        }
+
+        /* Show the popup */
+        #empty-cart-popup.show {
+            display: block;
+            opacity: 1;  /* Fully visible */
+            visibility: visible;  /* Make it visible */
+            transition: opacity 1s ease-out;  /* Fade in */
+        }
+        .btn-login {
+    background-color: #4CAF50;
+}
+.btn-login:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <h1>Your Cart</h1>
+
+    <div id="cart">
+        {% if login_required %}
+            <div class="login-prompt">
+                <p>You need to log in to access your cart.</p>
+            </div>
+        {% else %}
+            {% if cart %}
+                {% for item in cart %}
+                <div class="cart-item" id="cart-item-{{ item.name }}">
+                    <img src="{{ item.img }}" alt="{{ item.name }}" class="item-image">
+                    <div class="item-details">
+                        <h3>{{ item.name }}</h3>
+                        <p>Total Price: ₹{{ item.totalPrice }}</p>  <!-- Display totalPrice -->
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <button onclick="removeFromCart('{{ item.name }}')">Remove</button>  <!-- Remove button -->
+                    </div>
+                </div>
+                {% endfor %}
+            
+                <!-- Display Total Price only when cart is not empty -->
+                <div class="total-price">
+                    <h3>Total: ₹{{ total_price }}</h3>
+                </div>
+            
+            {% else %}
+                <p>Your cart is empty.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div id="cart-actions" style="text-align: center; margin-top: 20px;">
+        {% if user.is_authenticated %}
+            <!-- Show Continue Shopping and Proceed to Checkout buttons if user is logged in -->
+            <button class="btn btn-continue" onclick="continueShopping()">
+                Continue Shopping
+            </button>
+            <form action="{% url 'checkout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-checkout">
+                    Proceed to Checkout
+                </button>
+            </form>
+        {% else %}
+            <!-- Show Login button if user is not logged in -->
+            <a href="{% url 'login' %}" class="btn btn-login">
+                Log In
+            </a>
+        {% endif %}
+    </div>    
+
+    <!-- CSRF Token (for the fetch API requests) -->
+    <form id="csrf-form" method="POST">
+        {% csrf_token %}
+    </form>
+
+    <!-- Popup Message for empty cart -->
+    <div id="empty-cart-popup">
+        No items in the cart. Please add some items before proceeding to checkout.
+    </div>
+
+    <script>
+          // Function to redirect to the last visited page or fallback to homepage
+          function continueShopping() {
+            const lastVisitedPage = document.referrer || '/';  // Use document.referrer or fallback to '/'
+            window.location.href = lastVisitedPage;  // Redirect to the last visited page
+        }
+
+        // Automatically update the cart count when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCartCount();
+        });
+
+        document.querySelector('.btn-checkout').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+
+    // Send the checkout request via fetch
+    fetch('{% url "checkout" %}', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            cart: {{ cart|safe }},
+        }),
+    })
+    .then(response => {
+        if (response.redirected) {
+            // If checkout is successful, handle the redirect to receipt or whatever is necessary
+            window.location.href = response.url;  // You may redirect to the receipt page or handle as needed
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data.error) {
+            // Show the popup for empty cart
+            var popup = document.getElementById('empty-cart-popup');
+            popup.classList.add('show');
+            setTimeout(function() {
+                popup.classList.remove('show');
+            }, 5000);
+        }
+    })
+    .catch(error => console.error('Error during checkout:', error));
+});
+        
+    </script>
+</body>
+</html>

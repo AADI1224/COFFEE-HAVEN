@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table</title>
+    <style>
+        /* Add some basic styling for the form */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .form-container input, .form-container select, .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-container .form-check {
+            margin-bottom: 10px;
+        }
+
+        .form-container .table-list {
+            margin-top: 20px;
+        }
+
+        .form-container .table-list li {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="table-list">
+        <h3>Available Tables</h3>
+        {% if available_tables %}
+            <ul>
+                {% for table in available_tables %}
+                    <li>
+                        <label>
+                            <input type="checkbox" name="tables" value="{{ table.id }}">
+                            {{ table.number }} - ₹{{ table.price_per_hour }}/hr (Seats: {{ table.seats }})
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tables available at this time. Please choose a different time or date.</p>
+        {% endif %}
+    </div>
+    <div class="form-container">
+        <h2>Book a Table(s)</h2>
+
+        <!-- Success Message -->
+        {% if messages %}
+            <div class="success-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Form Starts Here -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.booking_date.label_tag }} {{ form.booking_date }}
+            {{ form.booking_time.label_tag }} {{ form.booking_time }}
+            {{ form.contact_number.label_tag }} {{ form.contact_number }}
+            
+            <label for="id_hours">Duration:</label>
+            {{ form.hours }} {{ form.minutes }}
+            
+            <label>Select Tables:</label>
+            {% for table in available_tables %}
+                <label>
+                    <input type="checkbox" name="tables" value="{{ table.id }}">
+                    {{ table }} (₹{{ table.price_per_hour }}/hour)
+                </label>
+            {% endfor %}
+        
+            <button type="submit">Book Table(s)</button>
+        </form>
+        
+        {% if form.errors %}
+            <div class="error-message">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

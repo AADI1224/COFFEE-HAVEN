@@ -1,0 +1,34 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Coffee Shop</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Welcome to Our Coffee Shop</h1>
+        </div>
+
+        <!-- Cart Icon with item count -->
+        <div class="cart-icon">
+            <a href="{% url 'cart' %}">
+                <img src="{% static 'images/cart-icon.png' %}" alt="Cart">
+                <span id="cart-count">
+                    {% with cart|length as cart_items %}
+                        {{ cart_items }}
+                    {% endwith %}
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

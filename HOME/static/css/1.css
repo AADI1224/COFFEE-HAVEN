@@ -1,0 +1,513 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cookie&family=Monsieur+La+Doulaise&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cookie&family=Monsieur+La+Doulaise&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  box-sizing: border-box;
+}
+
+/* Adjust Circular Image Hover Effect */
+.circular-image:hover {
+    transform: scale(1.15); /* Slightly larger zoom */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Refine Hero Video Section for Consistency */
+.hero-video, .hero-video3, .hero-video2 {
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Optimize Buttons for Mobile */
+.btn-custom {
+    padding: 10px 25px;
+    font-size: 1rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif, Arial, Helvetica, sans-serif;
+    /*background: linear-gradient(to right, #1f1f1f, #2d2d2d);*/
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: url("/static/images/bg-slate.png") no-repeat center center fixed; 
+    background-size: cover;
+    user-select: none;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(to right, #623c3c, #d100ff);
+    position: fixed; /* Fix navbar at the top */
+    top: 0; /* Ensure it's aligned to the top */
+    left: 0; /* Align it to the left edge */
+    width: 100%; /* Full width of the screen */
+    z-index: 1000; /* Ensure it stays above other content */
+    height: 80px; /* Fixed height for navbar */
+    padding: 10px 20px; /* Padding for spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow under the navbar */
+}
+
+/* Adjust the height of the navbar */
+.navbar-brand {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    background-image: linear-gradient(to left, #f39c12, #e74c3c);
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 4px;
+    animation: brandAnimation 2s ease-out infinite;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 20px;
+}
+
+.nav-link {
+    color: #f39c12 !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #f39c12;
+    transition: width 0.7s ease; 
+
+}
+.nav-link:hover {
+
+    color: #ddd !important;
+    transform: scale(1.1);
+}
+.nav-link:hover::after {
+    width: 100%; /* Expand the underline to full width */
+}
+.company-logo {
+    height: 80px; /* Adjust the height of the logo */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Add some space after the logo */
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 150px 20px 100px;
+    background: url('https://source.unsplash.com/1600x900/?coffee-shop') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-shadow: 2px 2px 5px #000;
+    animation: fadeIn 3s ease-in-out;
+    position: relative;
+}
+
+/* Main Heading (Title) with New Font */
+.hero-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    animation: slideInUp 1s ease-out;
+    margin-top: 25px;
+}
+
+.hero-section h1 span {
+    font-family: 'Caveat', cursive;
+    font-size: 7rem;
+    font-style: italic;
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b, #ff6a00, #d100ff);
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    animation: colorAnimation 2.5s ease-in-out infinite;
+}
+
+/* Secondary Heading (Subtext) with New Font */
+.hero-section p {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    animation: fadeInUp 3s ease-out;
+}
+
+/* Button Styles */
+.btn-custom {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 25px;
+}
+.btn-custom:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Gallery */
+.image-gallery {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.d-flex img {
+    margin-right: 40px; /* Adjust horizontal spacing */
+    margin-left: 40px;
+}
+
+.d-flex img:last-child {
+    margin-right: 0px; /* Remove spacing after the last image */
+}
+.rotating-image {
+    animation: rotate 3s linear infinite;
+    width: 250px; /* Adjust size */
+    height: auto;
+}
+.static-image {
+    height: 350px;
+    width: 380px;
+}
+.croissant{
+    height: 260px;
+    width: 420px;
+}
+.pastry{
+    height: 270px;
+    width: 340px;
+}
+.cupcake{
+    height: 320px;
+    width: 220px;
+}
+/* Animation keyframes for rotation */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes colorAnimation {
+    0% { color: transparent; background-image: linear-gradient(to right, #ff7e5f, #feb47b); }
+    50% { color: transparent; background-image: linear-gradient(to right, #ff6a00, #d100ff); }
+    100% { color: transparent; background-image: linear-gradient(to right, #ff7e5f, #feb47b); }
+}
+@keyframes brandAnimation {
+    0% { letter-spacing: 4px; }
+    50% { letter-spacing: 10px; }
+    100% { letter-spacing: 4px; }
+}
+
+.user-logo-link {
+    display: inline-block;
+    margin-left: 20px; /* Space between navbar links and the logo */
+    transition: transform 0.3s ease; /* Animation for hover */
+}
+
+.user-logo {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes the logo circular */
+    object-fit: cover; /* Ensures the image fits well */
+    cursor: pointer;
+}
+
+.user-logo-link:hover {
+    transform: scale(1.1); /* Slightly enlarge the logo on hover */
+}
+
+/* Circular Image Gallery Styling */
+.circular-image-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Space between images */
+    margin-top: 20px;
+}
+
+/* Container for Each Image and Name */
+.circular-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+/* Circular Image Styling */
+.circular-image {
+    width: 150px; /* Set width of circular image */
+    height: 150px; /* Set height of circular image */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: contain; /* Ensure the image fits well */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: transform 0.3s ease; /* Animation on hover */
+    border: 3px solid white;
+}
+
+/* Image Hover Effect */
+.circular-image:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Image Name Styling */
+.image-name {
+    margin-top: 10px; /* Space between the image and name */
+    font-family: 'Poppins', sans-serif; /* Use consistent font style */
+    font-size: 1.2rem; /* Adjust font size */
+    font-weight: bold; /* Make the name bold */
+    color: #f39c12; /* Name color matches the theme */
+    text-transform: capitalize; /* Capitalize the name */
+    text-align: center;
+}
+
+/* Optional Name Hover Effect */
+.circular-image-container:hover .image-name {
+    color: #e74c3c; /* Change name color on hover */
+}
+
+/* Image Hover Effect */
+.circular-image:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Hero Video Sections */
+.hero-video, .hero-video3 {
+    position: relative;
+    width: 100%;  /* Ensure both videos take the full width */
+    height: 100%; /* Set height to 50% of the viewport height (you can adjust as needed) */
+    overflow: hidden;
+}
+
+/* Video Container Styles for Both Sections */
+.video-container, .video-container3 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.video-container iframe,
+.video-container video,
+.video-container3 iframe,
+.video-container3 video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the container without distortion */
+    z-index: -1; /* Keeps the video behind text or other content */
+}
+
+.hero-video2 .tagline {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #e0e0e0;
+    text-align:left;
+    margin-bottom: 15px;
+}
+
+.hero-video2 .tag-paragraph {
+    padding: 20px;
+    font-family: cursive;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.video-container {
+    text-align: center;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .hero-section {
+        padding: 120px 20px 80px; /* Reduce padding for smaller screens */
+    }
+
+    .navbar {
+        height: auto;
+    }
+}
+
+.company-logo2 {
+    height: 200px; /* Adjust the height of the logo */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Add some space after the logo */
+    margin-left: 0px;
+}
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0; /* Ensure no margin at the top */
+    margin-bottom: 20px;
+    margin-left: 0;
+}
+
+.list-element:hover{
+    transform: scale(1.2);
+}
+.store-icon  {
+    width: 50px;
+    height: auto;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+a:first-child .store-icon {
+    margin-right: 0; /* Remove margin from the second image */
+    margin-left: 0;
+    text-align: center;
+}
+a:nth-child(2) .store-icon {
+    margin-right: 0;
+    margin-left: 0;
+    text-align: center;
+}
+a:last-child .store-icon {
+    margin-right: 0; /* Remove margin from the second image */
+    margin-left: 0;
+    text-align: center;
+}
+
+.store-icon:hover {
+    transform: scale(1.5); /* Slightly enlarge on hover */
+}
+.phone-number {
+    flex-grow: 1; /* This makes the <p> tag take the remaining space */
+    margin: 0; /* Removes any default margin from the <p> tag */
+    text-align: center; /* Align the text to the left */
+    font-size: 18px; /* Customize the font size as needed */
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        height: 60px; /* Reduced height for smaller screens */
+        padding: 8px 15px; /* Reduce padding for a more compact navbar */
+        flex-direction: column; /* Stack navbar items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+    
+    .navbar-brand {
+        font-size: 1.8rem; /* Adjust font size for mobile */
+        margin-bottom: 10px; /* Space below the brand */
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Stack nav items vertically */
+        width: 100%; /* Ensure full width for the navbar items */
+        justify-content: center; /* Center items in the navbar */
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 0;
+        margin-bottom: 10px; /* Space between items */
+    }
+
+    /* Make sure the images in the navbar are responsive */
+    .company-logo {
+        width: 40px; /* Smaller logo for mobile */
+        height: auto;
+        margin-right: 15px;
+    }
+
+    .user-logo {
+        width: 35px; /* Smaller user logo for mobile */
+        height: 35px;
+    }
+
+    /* Adjust the hero section to create space below the fixed navbar */
+    .hero-section {
+        margin-top: 80px; /* Add a top margin to push content below the navbar */
+    }
+
+    /* Optionally, adjust the font size of the navbar links */
+    .navbar-nav .nav-item .nav-link {
+        font-size: 1rem; /* Reduce font size for mobile */
+    }
+
+    /* Make the brand name smaller */
+    .navbar-brand {
+        font-size: 1.8rem; /* Adjust brand font size for mobile */
+    }
+}
+
+.custom-dropdown-menu {
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.custom-dropdown-menu .dropdown-item {
+    padding: 8px 15px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-dropdown-menu .dropdown-item:hover {
+    background-color: #e9ecef; /* Subtle hover effect */
+    border-radius: 6px;
+}
+
+.custom-dropdown-menu .dropdown-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.custom-dropdown-menu .dropdown-divider {
+    margin: 8px 0;
+    border-color: #dee2e6;
+}
+
+.custom-dropdown-menu .text-primary {
+    color: #007bff;
+}
+
+.bi {
+    font-size: 18px; /* Icon size */
+}

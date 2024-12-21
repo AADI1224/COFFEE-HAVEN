@@ -1,0 +1,205 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f3eb;
+    color: #4a3f35;
+    padding-top: 80px;
+}
+
+.about-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.about-section .content {
+    max-width: 600px;
+    margin: 20px;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    color: #8b5a2b;
+}
+
+.about-section .content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.about-section .content p.italic {
+    font-style: italic;
+    color: #6b4f3a;
+}
+
+.about-section img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #4a3f35;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #d4a373;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-section img {
+        margin-bottom: 20px;
+    }
+}
+
+.navbar {
+    background: linear-gradient(to right, #623c3c, #d100ff);
+    position: fixed; /* Make navbar fixed */
+    top: 0; /* Align to the top of the page */
+    left: 0; /* Align to the left edge */
+    width: 100%; /* Ensure it takes the full width of the screen */
+    z-index: 100; /* Make sure it's on top of other content */
+    padding: 5px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a slight shadow below the navbar */
+}
+/* Branding Animation */
+.navbar-brand {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    background-image: linear-gradient(to left, #f39c12, #e74c3c);
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 4px;
+    animation: brandAnimation 2s ease-out infinite;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Hover Effects for Branding */
+.navbar-brand:hover {
+    color: #fff;
+    background-image: linear-gradient(to left, #e74c3c, #f39c12);
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+    animation: none;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 20px;
+}
+
+/* Navbar Links Animation */
+.nav-link {
+    color: #f39c12 !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #f39c12;
+    transition: width 0.7s ease; 
+
+}
+.nav-link:hover {
+
+    color: #ddd !important;
+    transform: scale(1.1);
+}
+.nav-link:hover::after {
+    width: 100%; /* Expand the underline to full width */
+}
+
+.company-logo {
+    height: 80px;
+    width: auto;
+    margin-right: 15px;
+    max-height: 120px;
+}
+
+.user-logo-link {
+    display: inline-block;
+    margin-left: 20px; /* Space between navbar links and the logo */
+    transition: transform 0.3s ease; /* Animation for hover */
+}
+
+.user-logo {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes the logo circular */
+    object-fit: cover; /* Ensures the image fits well */
+    cursor: pointer;
+}
+
+.user-logo-link:hover {
+    transform: scale(1.1); /* Slightly enlarge the logo on hover */
+}
+.image-stack {
+    position: relative;
+    max-width: 400px; /* Adjust based on design */
+    margin: 20px;
+}
+.image-stack .image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Stacking images with slight vertical offsets */
+.image-stack .image:nth-child(1) {
+    z-index: 3;
+    transform: translate(0, 0);
+    opacity: 1;
+    margin-bottom: 15px; /* Adds space below the first image */
+}
+
+.image-stack .image:nth-child(2) {
+    z-index: 2;
+    transform: translate(15px, 15px);
+    opacity: 0.9;
+    margin-bottom: 15px; /* Adds space below the second image */
+}
+
+.image-stack .image:nth-child(3) {
+    z-index: 1;
+    transform: translate(30px, 30px);
+    opacity: 0.8;
+}
+
+/* Hover effect to bring focus on all images */
+.image-stack:hover .image {
+    transform: translate(0, 0);
+    opacity: 1;
+}
